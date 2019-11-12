@@ -6,7 +6,7 @@ import Admin from './pages/Admin';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { AuthContext } from './context/auth';
-
+import './index.css';
 
 function Main(props) {
 	const [authTokens, setAuthTokens] = useState();
@@ -28,7 +28,7 @@ function Main(props) {
 							
 							
 						</ul>
-						<div >
+						<div className="content">
 							<Route exact path="/" component={Home}/>
 							<Route path="/login" component={Login} />
 							<Route path="/signup" component={Signup} />
