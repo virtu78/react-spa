@@ -4,13 +4,16 @@ import axios from 'axios';
 import logoImg from './img/logo.jpg';
 import { Card, Logo, Form, Input, Button, Error } from "../components/AuthForms";
 import { useAuth } from "../context/auth";
+
+
+
 function Login(props) {
-	const referer  = props.location.referer || '/';
-  const [isLoggedIn, setLoggedIn] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const { setAuthTokens } = useAuth();
+const referer  = props.location.referer || '/';
+const [isLoggedIn, setLoggedIn] = useState(false);
+const [isError, setIsError] = useState(false);
+const [userName, setUserName] = useState("");
+const [password, setPassword] = useState("");
+const { setAuthTokens } = useAuth();
   
   function postLogin() {
     axios.post("http://localhost:3000/login", {
