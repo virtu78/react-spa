@@ -1,18 +1,9 @@
 
 import React, {Component} from "react";
 import DisplayItems from "./DisplayItems";
-import {  Input, Button } from '../components/AuthForms';
+import styled from 'styled-components';
 
-const Input = styled.input`
-.todoListMain.header input {
-padding: 10px;
-font-size: 16px;
-border: 2px solid #FFF;
-width: 165px;
-`;
-
-
-const Button = styled.input
+const Button = styled.button`
 padding: 10px;
 font-size: 16px;
 margin: 10px;
@@ -20,12 +11,18 @@ margin-right: 0px;
 background-color: #0066FF;
 color: #FFF;
 border: pointer;
-}
-.todoListMain.header button hover {
+  &:hover {
 background-color: #003399;
 border: 2px solid #003399;
 cursor: pointer;
-
+  }
+`;
+const Input = styled.input`
+padding: 10px;
+font-size: 16px;
+border: 2px solid #FFF;
+width: 165px;
+`;
 
 
 	class Home extends Component {
