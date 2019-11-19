@@ -1,5 +1,8 @@
 
 import React, {Component} from "react";
+import axios from 'axios';
+import DisplayUser from './DisplayUserName';
+import DisplayEmail from './DisplayEmail';
 const theList ={
 listStyle: "none",
 paddingLeft: "0",
@@ -12,25 +15,42 @@ padding: "15px",
 marginBottom: "15px",
 borderRadius: "5px"
 }
+class DisplayItems extends Component {
+		constructor(props) {
+    super(props);
+    this.state = {
+			mess:[]
+		};
+		
+    	axios.get('https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=Fred')
+		.then(result => {
+       this.setState({mess: result.data.message.tasks});
+       //console.log(this.state.mess)
+        }).catch(e => {
+        console.log("error")
+		});
+
+		
+	}
 	
-	class DisplayItems extends Component {
+	
+	
+	
+	
 	render(){	
 		
-	var todoEntries = this.props.mess;
-	var itemDisplay = todoEntries.map(function(listItems){
-		var i
-		for(i=0; i<todoEntries.length; i++)	{
-		var items=todoEntries[i];
-		//console.log(items.text);
-		}
-					
-	return <li style={theListLi} key={items.key}>{items.text}</li>		
-	});	
-
+		var todoEntries = this.state.mess;
+		var itemDisplay = todoEntries.map(function(listItems){					
+			return <li style={theListLi} key={listItems.id}>{listItems.text}</li>		
+		});	
 		return (
-		<ul style={theList}>
-			{itemDisplay}
-		</ul>
+		<div>
+			<DisplayUser mess={this.state.mess}/>
+			<DisplayEmail mess={this.state.mess}/>
+			<ul style={theList}>
+				{itemDisplay}
+			</ul>
+			</div>
 		);
 	}
 }

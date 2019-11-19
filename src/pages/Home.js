@@ -1,9 +1,10 @@
 
-import React  from "react";
-
+import React, { useState } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import DisplayItems from './DisplayItems';
+import { useAuth } from "../context/auth";
+import { Link, Redirect } from "react-router-dom"
 const Button = styled.button`
 padding: 10px;
 font-size: 16px;
@@ -25,30 +26,20 @@ border: 2px solid #FFF;
 width: 165px;
 `;
 	
+function Home (props){
 
-class Home extends React.Component{
-	constructor(props) {
-    super(props);
-		this.state = {
-			mess:[]
-		};
-	}
-	componentWillMount(){
-		axios.get('https://uxcandy.com/~shapoval/test-task-backend/v2?developer=Fred')
-		.then(result => {
-       this.setState({mess: result.data.message.tasks});
-       //console.log(this.state.mess)
-        }).catch(e => {
-        console.log("error")
-		});
-	}
-	
-	componentDidMount(){
-	 
-	
-}
-	
-	  post() {
+
+const referer  = props.location.referer || '/';
+const [isLoggedIn, setLoggedIn] = useState(false);
+const [isError, setIsError] = useState(false);
+const [userName, setUserName] = useState("");
+const [password, setPassword] = useState("");
+const { setAuthTokens } = useAuth();
+  
+  function logOut() {
+    setAuthTokens();
+  }
+	   function postLogin() {
 	  var form = new FormData();
 	  form.append("username","Example");
       form.append("password","123");
@@ -57,29 +48,38 @@ class Home extends React.Component{
     axios.post('https://uxcandy.com/~shapoval/test-task-backend/v2/create?developer=Fred', 
    form
     ).then(result => {
-      
-       console.log(result)
-       }).catch(e => {
-        console.log("error")
-		});
-	}
-	render(){
-
+      if (result.status === 200) {
+		  console.log(result);
+        setAuthTokens(result.data);
+        setLoggedIn(true);
+      } else {
+        setIsError(true);
+      }
+    }).catch(e => {
+      setIsError(true);
+    });
+  }
+  
+      if (isLoggedIn) {
+    return <Redirect to={referer} />;
+  }
 		return (
 		
 			<div className="todoListMain">
 				<div className="header">
+				<Button onClick={logOut}>Log out</Button>
 					<form >
+						
 						<Input placeholder="введите задачу">
 						</Input>
-						<Button onClick={this.post}>Добавить</Button>
+						<Button onClick={postLogin}>Добавить</Button>
 					</form>
-				<DisplayItems mess={this.state.mess}/>
+				<DisplayItems />
 				</div>
 				
 			</div>
 		);
-	}
+	
 }
 export default Home;
 
