@@ -36,22 +36,21 @@ const [userName, setUserName] = useState("");
 const [password, setPassword] = useState("");
 const { setAuthTokens } = useAuth();
   
-  function logOut() {
-    setAuthTokens();
-  }
+  
 	   function postLogin() {
+		   console.log(isLoggedIn);
 	  var form = new FormData();
 	  form.append("username","Example");
       form.append("password","123");
       form.append("email","example@example.com");
      form.append(" text","УУзнайте что-то абсолютно новое для себя. К примеру, есть ли вода на других планетах Солнечной системы?.");
-    axios.post('https://uxcandy.com/~shapoval/test-task-backend/v2/create?developer=Fred', 
+    axios.post('https://uxcandy.com/~shapoval/test-task-backend/v2/create?developer=Friz', 
    form
     ).then(result => {
-      if (result.status === 200) {
-		  console.log(result);
+      if (result.status === 200 ) {
+		  
         setAuthTokens(result.data);
-        setLoggedIn(true);
+        
       } else {
         setIsError(true);
       }
@@ -64,18 +63,13 @@ const { setAuthTokens } = useAuth();
     return <Redirect to={referer} />;
   }
 		return (
-		
 			<div className="todoListMain">
 				<div className="header">
-				<Button onClick={logOut}>Log out</Button>
-					<form >
-						
-						<Input placeholder="введите задачу">
-						</Input>
-						<Button onClick={postLogin}>Добавить</Button>
-					</form>
+					<Input placeholder="введите задачу">
+					</Input>
+					<Button onClick={postLogin}>Добавить</Button>				
 				<DisplayItems />
-				</div>
+			</div>
 				
 			</div>
 		);

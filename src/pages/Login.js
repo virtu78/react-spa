@@ -17,15 +17,13 @@ const { setAuthTokens } = useAuth();
   
   function postLogin() {
 	  var form = new FormData();
-	  form.append("username","Example");
-      form.append("password","123");
-      form.append("email","example@example.com");
-     form.append(" text","УУзнайте что-то абсолютно новое для себя. К примеру, есть ли вода на других планетах Солнечной системы?.");
-    axios.post('https://uxcandy.com/~shapoval/test-task-backend/v2/create?developer=Fred', 
-   form
-    ).then(result => {
-      if (result.status === 200) {
-		  console.log(result);
+	  
+    axios.post('https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=Friz', {
+   userName,
+   password
+    }).then(result => {
+      if (result.status === 200 ) {
+		  
         setAuthTokens(result.data);
         setLoggedIn(true);
       } else {

@@ -22,7 +22,7 @@ class DisplayItems extends Component {
 			mess:[]
 		};
 		
-    	axios.get('https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=Fred')
+    	axios.get('https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=Friz')
 		.then(result => {
        this.setState({mess: result.data.message.tasks});
        //console.log(this.state.mess)
