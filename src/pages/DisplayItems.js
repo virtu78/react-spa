@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import DisplayUser from './DisplayUserName';
 import DisplayEmail from './DisplayEmail';
+import Edit from './Edit';
 const theList ={
 listStyle: "none",
 paddingLeft: "0",
@@ -19,8 +20,13 @@ class DisplayItems extends Component {
 		constructor(props) {
     super(props);
     this.state = {
-			mess:[]
+		   
+            itemDisplay: [],
+			mess:[],
+			
 		};
+		
+		
 		
     	axios.get('https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=Friz')
 		.then(result => {
@@ -33,16 +39,17 @@ class DisplayItems extends Component {
 		
 	}
 	
-	
-	
+
 	
 	
 	render(){	
-		
-		var todoEntries = this.state.mess;
-		var itemDisplay = todoEntries.map(function(listItems){					
-			return <li style={theListLi} key={listItems.id}>{listItems.text}</li>		
-		});	
+			let itemDisplay = this.state.mess.map((val,key)=> {			
+            return (<Edit 
+            key={key}
+            text={val.text} 
+            />
+            );
+            });
 		return (
 		<div>
 			<DisplayUser mess={this.state.mess}/>
