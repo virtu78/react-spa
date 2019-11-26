@@ -13,9 +13,9 @@ export default	function configureStore(initialState) {
 			rootReducer, 
 			initialState,
 			compose(
-			
-			
-			
+			applyMiddleware(
+			thunk,
+			),				
 			window.devToolsEtension())
 		);
 		store = createdStore();		 
