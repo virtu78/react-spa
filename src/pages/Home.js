@@ -1,7 +1,10 @@
 
-import React, { useState } from "react";
+
+import React, {Component} from "react";
 import styled from 'styled-components';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions';
 import DisplayItems from './DisplayItems';
 import { useAuth } from "../context/auth";
 import { Link, Redirect } from "react-router-dom"
@@ -26,8 +29,24 @@ border: 2px solid #FFF;
 width: 165px;
 `;
 	
-function Home (props){
+class Home extends Component{
+	constructor(props) {
+    super(props);
+    this.state = {
+		   todo:[],
+           
+			
+			
+		};
 
+    
+   }
+	
+	componentWillMount(){
+		
+		
+		}
+/*
 
 const referer  = props.location.referer || '/';
 const [isLoggedIn, setLoggedIn] = useState(false);
@@ -62,12 +81,18 @@ const { setAuthTokens } = useAuth();
       if (isLoggedIn) {
     return <Redirect to={referer} />;
   }
+	*/
+	
+	
+	//
+	
+	render(){
 		return (
 			<div className="todoListMain">
 				<div className="header">
 					<Input placeholder="введите задачу">
 					</Input>
-					<Button onClick={postLogin}>Добавить</Button>				
+					<Button onClick={this.props.onAddTodo}>Добавить</Button>				
 				<DisplayItems />
 			</div>
 				
@@ -75,7 +100,19 @@ const { setAuthTokens } = useAuth();
 		);
 	
 }
-export default Home;
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddTodo: todo => {
+      dispatch(addTodo(todo));
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Home);
 
 
 

@@ -1,6 +1,15 @@
 
 import React, {Component} from "react";
-import axios from 'axios';
+//import { connect } from 'react-redux';
+//import { addTodo } from '../actions';
+
+
+//import axios from 'axios';
+//import fetch from 'isomorphic-fetch';
+//import {connect} from 'react-redux';
+
+
+//import getposts  from "../actions/posts";
 import DisplayUser from './DisplayUserName';
 import DisplayEmail from './DisplayEmail';
 import Edit from './Edit';
@@ -20,29 +29,30 @@ class DisplayItems extends Component {
 		constructor(props) {
     super(props);
     this.state = {
-		   
+		   mess:[],
             itemDisplay: [],
-			mess:[],
+			
 			
 		};
 		
-		
-		
-    	axios.get('https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=Friz')
+		/*axios.get('https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=Friz')
 		.then(result => {
        this.setState({mess: result.data.message.tasks});
-       //console.log(this.state.mess)
+        console.log(this.state.mess)
         }).catch(e => {
         console.log("error")
 		});
-
-		
-	}
+	*/
+    	
 	
-
 	
+}
 	
 	render(){	
+		
+		    const	{  mess }	=	this.state
+		    
+		    console.log(this.state.mess);
 			let itemDisplay = this.state.mess.map((val,key)=> {			
             return (<Edit 
             key={key}
@@ -61,4 +71,18 @@ class DisplayItems extends Component {
 		);
 	}
 }
-export default DisplayItems;
+/*
+const mapStateToProps = (state) => ({
+    mess: state.mess
+    
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    
+    getposts: () => dispatch(getposts())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayItems);
+
+*/
+export default DisplayItems
