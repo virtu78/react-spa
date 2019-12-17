@@ -14,7 +14,7 @@ borderRadius: "5px"
 	
 class DisplayEmail extends Component {
 	render(){			
-		var todoEmail = this.props.mess.slice(0,1);
+		var todoEmail = this.props.todo.slice(0,1);
 		var emailDisplay = todoEmail.map(function(showmeEmail){						
 			return <li style={theListLi} key={showmeEmail.id}>{showmeEmail.email}</li>		
 		});	

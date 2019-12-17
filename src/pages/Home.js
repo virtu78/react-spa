@@ -4,7 +4,7 @@ import React, {Component} from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { addTodo } from '../actions';
+import { fetchAllTodos } from '../actions';
 import DisplayItems from './DisplayItems';
 import { useAuth } from "../context/auth";
 import { Link, Redirect } from "react-router-dom"
@@ -42,7 +42,7 @@ class Home extends Component{
     
    }
 	
-	componentWillMount(){
+	componentDidMount(){
 		
 		
 		}
@@ -93,7 +93,7 @@ const { setAuthTokens } = useAuth();
 					<Input placeholder="введите задачу">
 					</Input>
 					<Button onClick={this.props.onAddTodo}>Добавить</Button>				
-				<DisplayItems />
+				<DisplayItems todo={this.state.todo} onAddTodo={this.state.onAddTodo}/>
 			</div>
 				
 			</div>
@@ -101,16 +101,23 @@ const { setAuthTokens } = useAuth();
 	
 }
 }
+
+const mapStateToProps = state => {
+  return {
+    todo: state.todo
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onAddTodo: todo => {
-      dispatch(addTodo(todo));
+      dispatch(fetchAllTodos(todo));
     }
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Home);
 

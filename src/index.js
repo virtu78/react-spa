@@ -6,6 +6,8 @@ import thunk from 'redux-thunk';
 //import thunkMiddleware from 'redux-thunk'
 import {Provider} from "react-redux";
 import todosReducer from './reducers/todoReducer';
+
+import { fetchAllTodos } from './actions/index';
 //import { selectSubreddit, fetchPosts } from './actions'
 import Main from "./Main";
 
@@ -34,6 +36,9 @@ ReactDOM.render(
  
  
  const store = createStore(todosReducer, applyMiddleware(thunk));
+
+ store.dispatch(fetchAllTodos());
+
 ReactDOM.render(
 <Provider store={store}>
   

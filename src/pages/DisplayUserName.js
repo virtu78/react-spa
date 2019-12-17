@@ -13,8 +13,10 @@ borderRadius: "5px"
 }
 	
 class DisplayUser extends Component {
-	render(){			
-		var todoUser = this.props.mess.slice(0,1);
+	
+	render(){		
+	
+		var todoUser = this.props.todo.slice(0,1);
 		console.log(todoUser);
 		var userDisplay = todoUser.map(function(showmeUser){
 			return <li style={theListLi} key={showmeUser.id}>{"Пользователь " + showmeUser.username}</li>		

@@ -26,15 +26,12 @@ marginBottom: "15px",
 borderRadius: "5px"
 }
 class DisplayItems extends Component {
-		constructor(props) {
+	constructor(props) {
     super(props);
-    this.state = {
-		   mess:[],
-            itemDisplay: [],
-			
-			
+    	this.state = {
+			itemDisplay: []		
 		};
-		
+	}	
 		/*axios.get('https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=Friz')
 		.then(result => {
        this.setState({mess: result.data.message.tasks});
@@ -43,17 +40,28 @@ class DisplayItems extends Component {
         console.log("error")
 		});
 	*/
-    	
+	componentDidMount(){
+	//this.props.onAddTodo();	
+		
+	
 	
 	
 }
 	
 	render(){	
-		
-		    const	{  mess }	=	this.state
+
+			var	{ todo }	=	this.props;
+			
+			console.log(todo)
+			if(!this.props.todo.length) {
+				return (
+				  <div>
+					Нет задач
+				  </div>
+				)
+			  }
 		    
-		    console.log(this.state.mess);
-			let itemDisplay = this.state.mess.map((val,key)=> {			
+			let itemDisplay = this.props.todo.map((val,key)=> {			
             return (<Edit 
             key={key}
             text={val.text} 
@@ -62,9 +70,11 @@ class DisplayItems extends Component {
             });
 		return (
 		<div>
-			<DisplayUser mess={this.state.mess}/>
-			<DisplayEmail mess={this.state.mess}/>
+			
+			<DisplayUser todo={this.state.todo}/>
+			<DisplayEmail todo={this.state.todo}/>
 			<ul style={theList}>
+			{this.props.onAddTodo}
 				{itemDisplay}
 			</ul>
 			</div>
